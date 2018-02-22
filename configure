@@ -1,0 +1,26 @@
+#!/bin/bash
+
+CURT=${PWD}
+
+lib_debug=(<PATH_TO_TBB>/tbb*/build/linux_intel64_gcc*debug/libtbb_debug.so)
+lib_release=(<PATH_TO_TBB>/tbb*/build/linux_intel64*release/libtbb.so)
+
+if [ -e "${CURT}/build" ]
+then
+  mkdir -p ${CURT}/build
+fi
+cd ${CURT}/build
+
+cmake -G"Unix Makefiles"                   \
+"-DTBB_tbb_LIBRARY_DEBUG=${lib_debug}"     \
+"-DTBB_tbb_LIBRARY_RELEASE=${lib_release}" \
+-DCMAKE_BUILD_TYPE=Release                 \
+..
+
+# -DCMAKE_BUILD_TYPE=Debug
+# -DCMAKE_BUILD_TYPE=Release
+# -DCMAKE_BUILD_TYPE=RelWithDebInfo
+# -DCMAKE_BUILD_TYPE=MinSizeRel
+
+make -j16
+       
