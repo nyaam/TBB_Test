@@ -23,4 +23,5 @@ cmake -G"Unix Makefiles"                   \
 # -DCMAKE_BUILD_TYPE=MinSizeRel
 
 make -j16
-       
+
+make install
